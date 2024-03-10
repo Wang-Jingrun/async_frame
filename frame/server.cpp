@@ -9,34 +9,30 @@ using namespace yazi::async;
 
 void Server::start()
 {
-	// 系统初始化
-	auto sys = Singleton<System>::instance();
-	sys->init();
-	string root_path = sys->get_root_path();
+    auto sys = Singleton<System>::instance();
+    sys->init();
+    string root_path = sys->get_root_path();
 
-	// ini config
-	auto ini = Singleton<IniFile>::instance();
-	ini->load(root_path + "/config/server.ini");
+    // init config
+    auto ini = Singleton<IniFile>::instance();
+    ini->load(root_path + "/config/server.ini");
 
-	m_ip = (string)(*ini)["server"]["ip"];
-	m_port = (*ini)["server"]["port"];
-	m_log_level = (*ini)["server"]["log_level"];
-	m_stack_size = (*ini)["server"]["stack_size"];
+    m_ip = (string)(*ini)["server"]["ip"];
+    m_port = (*ini)["server"]["port"];
+    m_log_level = (*ini)["server"]["log_level"];
+    m_stack_size = (*ini)["server"]["stack_size"];
 
-	// ini logger
-	auto logger = Singleton<Logger>::instance();
-	logger->open(root_path + "/log/server.log");
-	logger->set_level(m_log_level);
-	logger->set_console(false);
+    // init logger
+    auto logger = Singleton<Logger>::instance();
+    logger->open(root_path + "/log/server.log");
+    logger->set_level(m_log_level);
 
-	// init schedule
-	m_schedule.create(m_stack_size);
-	auto r= new ConnectRoutine(ServerSocket(m_ip,m_port).fd());
-	m_schedule.append(r);
-	m_schedule.run();
+    m_schedule.create(m_stack_size);
+    m_schedule.append(new ConnectRoutine(ServerSocket(m_ip, m_port).fd()));
+    m_schedule.run();
 }
 
-void Server::append(Routine* r)
+void Server::append(Routine * routine)
 {
-	m_schedule.append(r);
+    m_schedule.append(routine);
 }

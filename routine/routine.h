@@ -3,9 +3,9 @@
 
 namespace yazi
 {
-	namespace routine
-	{
-		class Schedule;
+    namespace routine
+    {
+        class Schedule;
 
 		class Routine
 		{
@@ -19,17 +19,17 @@ namespace yazi
 				RT_SUSPEND			// 挂起
 			};
 
-			Routine();
-			virtual ~Routine();
+            Routine();
+            virtual ~Routine();
 
-			virtual void run() = 0;
+            virtual void run() = 0;
 
 			void resume();	// 恢复
 			void yield();	// 挂起
 			int status() const;
 
-		 protected:
-			static void func(void* ptr);
+        protected:
+            static void func(void * ptr);
 
 		 private:
 			ucontext_t m_ctx;	// 保持当前协程上下文信息

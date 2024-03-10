@@ -48,7 +48,7 @@ bool Socket::bind(const string & ip, int port)
     }
     m_ip = ip;
     m_port = port;
-    log_info("socket bind success: ip=%s, port=%d", ip.c_str(), port);
+    log_debug("socket bind success: ip=%s, port=%d", ip.c_str(), port);
     return true;
 }
 
@@ -59,7 +59,7 @@ bool Socket::listen(int backlog)
         log_error("socket listen error: errno=%d errmsg=%s", errno, strerror(errno));
         return false;
     }
-    log_info("socket listening ...");
+    log_debug("socket listening ...");
     return true;
 }
 

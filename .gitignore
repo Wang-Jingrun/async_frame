@@ -1,6 +1,7 @@
 # CLion project files
 .idea
 cmake-build-*
+cmake-build-debug-myubuntu
 .log
 
 # Prerequisites

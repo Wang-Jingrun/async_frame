@@ -1,9 +1,6 @@
 #include <async/request_routine.h>
 using namespace yazi::async;
 
-#include <socket/socket.h>
-using namespace yazi::socket;
-
 RequestRoutine::RequestRoutine(int sockfd) : Routine(), m_sockfd(sockfd)
 {
 }

@@ -8,21 +8,19 @@ using namespace yazi::routine;
 
 namespace yazi
 {
-	namespace async
-	{
+    namespace async
+    {
+        class ConnectRoutine : public Routine
+        {
+        public:
+            ConnectRoutine() = delete;
+            ConnectRoutine(int sockfd);
+            ~ConnectRoutine();
 
-		class ConnectRoutine: public Routine
-		{
-		 public:
-			ConnectRoutine() = delete;
-			ConnectRoutine(int sockfd);
-			~ConnectRoutine();
+            virtual void run();
 
-			virtual void run();
-
-		 private:
-			int m_sockfd;
-		};
-
-	} // async
-} // yazi
+        private:
+            int m_sockfd;
+        };
+    }
+}

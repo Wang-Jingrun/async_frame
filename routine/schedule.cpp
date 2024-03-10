@@ -11,10 +11,8 @@ Schedule::~Schedule()
 	if (m_stack != nullptr)
 	{
 		delete[] m_stack;
-		m_stack = nullptr;
 		m_stack_size = 0;
 	}
-
 	for (auto it : m_queue)
 	{
 		delete it;
@@ -47,7 +45,7 @@ int Schedule::size() const
 
 void Schedule::run()
 {
-	while(!m_queue.empty())
+	while (!m_queue.empty())
 	{
 		auto r = m_queue.front();
 		m_queue.pop_front();

@@ -1,3 +1,4 @@
+#include <iostream>
 #include <socket/client_socket.h>
 using namespace yazi::socket;
 
@@ -11,10 +12,10 @@ int main()
 	log_info("send: %s", data.c_str());
 	client.send(data.c_str(), data.size());
 
-	// 接收服务端的响应
-	char buf[1024] = { 0 };
-	client.recv(buf, sizeof(buf));
-	log_info("recv: %s", buf);
+    // 接收服务端的数据
+    char buf[1024] = {0};
+    client.recv(buf, sizeof(buf));
+    log_info("recv: %s", buf);
 
 	client.close();
 	return 0;

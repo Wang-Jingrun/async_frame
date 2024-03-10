@@ -1,28 +1,26 @@
 #pragma once
 
-#include <utility/logger.h>
-using namespace yazi::utility;
+#include <socket/socket.h>
+using namespace yazi::socket;
 
 #include <routine/routine.h>
 using namespace yazi::routine;
 
 namespace yazi
 {
-	namespace async
-	{
+    namespace async
+    {
+        class RequestRoutine : public Routine
+        {
+        public:
+            RequestRoutine() = delete;
+            RequestRoutine(int sockfd);
+            ~RequestRoutine();
 
-		class RequestRoutine : public Routine
-		{
-		 public:
-			RequestRoutine() = delete;
-			RequestRoutine(int sockfd);
-			~RequestRoutine();
+            virtual void run();
 
-			virtual void run();
-
-		 private:
-			int m_sockfd;
-		};
-
-	} // async
-} // yazi
+        private:
+            int m_sockfd;
+        };
+    }
+}
